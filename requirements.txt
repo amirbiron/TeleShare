@@ -1,0 +1,29 @@
+# Telegram Bot
+python-telegram-bot==20.7
+
+# Database
+pymongo==4.6.1
+
+# Social Media APIs
+tweepy==4.14.0
+facebook-sdk==3.1.0
+python-linkedin-v2==2.0.1a5
+google-api-python-client==2.108.0
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.1.1
+pytumblr==0.1.2
+
+# Environment & Config
+python-dotenv==1.0.0
+
+# Utilities
+requests==2.31.0
+Pillow==10.1.0
+python-magic==0.4.27
+
+# Logging & Monitoring
+coloredlogs==15.0.1
+
+# Development
+pytest==7.4.3
+pytest-asyncio==0.21.1

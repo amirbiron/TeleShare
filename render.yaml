@@ -1,0 +1,245 @@
+# קובץ הגדרות Render.com לבוט הפרסום האוטומטי
+# מאפשר פריסה אוטומטית של הבוט בענן
+
+services:
+  # הגדרת שירות הבוט הראשי
+  - type: web
+    name: social-media-bot
+    env: python
+    plan: starter  # תוכנית חינמית (מספיק לרוב המקרים)
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    
+    # הגדרות סביבה
+    envVars:
+      # הגדרות Python
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      
+      # מניעת timeout של Render
+      - key: PORT
+        value: 10000
+      
+      # הגדרות לוגים
+      - key: LOG_LEVEL
+        value: INFO
+      
+      # מצב פרודקשן
+      - key: MOCK_MODE
+        value: false
+      
+      # חובה להגדיר בממשק Render:
+      # TELEGRAM_BOT_TOKEN
+      # MONGODB_URI  
+      # וכל שאר הטוקנים הנדרשים
+    
+    # הגדרות בריאות השירות
+    healthCheckPath: /health  # אם נוסיף endpoint בעתיד
+    
+    # אוטו-דיפלוי מ-Git
+    autoDeploy: true
+    
+    # הגדרות משאבים
+    disk:
+      name: temp-disk
+      mountPath: /opt/render/temp
+      sizeGB: 1  # 1GB לקבצים זמניים
+    
+    # הגדרות רשת
+    region: oregon  # אזור שרת (אפשר לשנות)
+
+  # מסד נתונים MongoDB (אופציונלי - אם לא משתמשים ב-Atlas)
+  # מוערת כי Render לא מציע MongoDB חינמי
+  # - type: pserv
+  #   name: mongodb
+  #   env: docker
+  #   dockerfilePath: ./Dockerfile.mongo
+  #   plan: starter
+  #   disk:
+  #     name: mongodb-data
+  #     mountPath: /data/db
+  #     sizeGB: 1
+
+# ============================================================================
+# הוראות פריסה ב-Render
+# ============================================================================
+
+# שלב 1: הכנת הפרויקט
+# 1. העלו את הקוד ל-GitHub/GitLab
+# 2. ודאו שקובץ זה (.render.yaml) נמצא בשורש הפרויקט
+# 3. ודאו שקובץ requirements.txt עדכני
+
+# שלב 2: יצירת שירות ב-Render
+# 1. התחברו ל-https://render.com
+# 2. לחצו "New +" -> "Blueprint"
+# 3. חברו את הרפוזיטורי
+# 4. Render יקרא את הקובץ הזה אוטומטית
+
+# שלב 3: הגדרת משתני סביבה
+# בממשק Render, הוסיפו:
+
+# חובה:
+# TELEGRAM_BOT_TOKEN=your_bot_token_here
+
+# מסד נתונים (בחרו אחד):
+# MONGODB_URI=mongodb://localhost:27017/  # מקומי (לא מומלץ)
+# MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/db  # Atlas
+
+# רשתות חברתיות (לפי הצורך):
+# TWITTER_API_KEY=your_key
+# TWITTER_API_SECRET=your_secret
+# TWITTER_ACCESS_TOKEN=your_token
+# TWITTER_ACCESS_TOKEN_SECRET=your_token_secret
+# FACEBOOK_ACCESS_TOKEN=your_token
+# FACEBOOK_PAGE_ID=your_page_id
+# INSTAGRAM_BUSINESS_ACCOUNT_ID=your_account_id
+# LINKEDIN_ACCESS_TOKEN=your_token
+# YOUTUBE_REFRESH_TOKEN=your_token
+# TUMBLR_OAUTH_TOKEN=your_token
+# TUMBLR_OAUTH_SECRET=your_secret
+# TUMBLR_BLOG_NAME=your_blog
+# TIKTOK_ACCESS_TOKEN=your_token
+
+# אופציונלי:
+# TELEGRAM_CHANNEL_ID=@your_channel
+# MAX_FILE_SIZE_MB=50
+# AUTO_POST_MODE=false
+
+# שלב 4: פריסה
+# Render יבנה ויפרוס אוטומטית!
+
+# ============================================================================
+# טיפים לפריסה מוצלחת
+# ============================================================================
+
+# 1. MongoDB:
+# מומלץ להשתמש ב-MongoDB Atlas (חינמי עד 512MB)
+# https://www.mongodb.com/atlas
+
+# 2. תכנית Render:
+# - Starter: חינמית, מספיקה לבוטים קטנים
+# - Standard: $7/חודש, עבור בוטים עם תעבורה גבוהה
+
+# 3. Logs:
+# ראו לוגים בממשק Render תחת "Logs"
+# או השתמשו ב-Render CLI
+
+# 4. עדכונים:
+# כל push ל-main branch יגרום לפריסה מחדש
+
+# 5. בעיות נפוצות:
+# - timeout: הגדילו את ה-timeout בהגדרות Render
+# - memory: שדרגו לתכנית גבוהה יותר
+# - disk space: נקו קבצים ישנים או הגדילו דיסק
+
+# ============================================================================
+# קובץ Dockerfile אלטרנטיבי (אם נדרש)
+# ============================================================================
+
+# במקרה שרוצים שליטה מלאה, אפשר ליצור Dockerfile:
+
+# FROM python:3.11-slim
+# 
+# WORKDIR /app
+# 
+# # התקנת תלויות מערכת
+# RUN apt-get update && apt-get install -y \
+#     ffmpeg \
+#     && rm -rf /var/lib/apt/lists/*
+# 
+# # העתקת requirements והתקנה
+# COPY requirements.txt .
+# RUN pip install --no-cache-dir -r requirements.txt
+# 
+# # העתקת הקוד
+# COPY . .
+# 
+# # יצירת תיקיות
+# RUN mkdir -p temp logs
+# 
+# # הרצת הבוט
+# CMD ["python", "main.py"]
+
+# ============================================================================
+# אלטרנטיבות לRender
+# ============================================================================
+
+# אם Render לא מתאים, אפשר להשתמש ב:
+
+# 1. Heroku:
+# - יצרו Procfile: "worker: python main.py"
+# - הוסיפו heroku.yml עם Python buildpack
+
+# 2. Railway:
+# - פשוט מאוד, יקרא את requirements.txt אוטומטית
+# - הוסיפו "start": "python main.py" ל-package.json
+
+# 3. DigitalOcean App Platform:
+# - דומה ל-Render, תומך ב-.do/app.yaml
+
+# 4. Google Cloud Run:
+# - צריך Dockerfile
+# - טוב לעומסים משתנים
+
+# 5. AWS Lambda:
+# - מורכב יותר, אבל חסכוני לבוטים קטנים
+# - צריך להתאים את הקוד לServerless
+
+# ============================================================================
+# מעקב וניטור
+# ============================================================================
+
+# לאחר הפריסה, מומלץ להוסיף:
+
+# 1. Health Check:
+# פתחו endpoint פשוט ב-Flask/FastAPI
+# @app.route('/health')
+# def health():
+#     return {'status': 'ok', 'timestamp': datetime.now()}
+
+# 2. Monitoring:
+# - UptimeRobot לבדיקת זמינות
+# - Sentry לשגיאות
+# - New Relic לביצועים
+
+# 3. Alerts:
+# הגדירו התראות ב-Render או בשירות חיצוני
+# עבור:
+# - הפסקת שירות
+# - שגיאות חוזרות
+# - זיכרון מלא
+
+# ============================================================================
+# גיבויים ואבטחה
+# ============================================================================
+
+# 1. גיבוי משתני סביבה:
+# שמרו עותק של כל הטוקנים במקום בטוח
+# (לא בGit!)
+
+# 2. רוטציית טוקנים:
+# החליפו טוקנים מדי פעם
+# עדכנו ב-Render אחרי כל החלפה
+
+# 3. לוגים:
+# ודאו שלוגים לא חושפים מידע רגיש
+# הגדירו log retention מתאים
+
+# ============================================================================
+# עלויות צפויות (בדולרים לחודש)
+# ============================================================================
+
+# Render Starter (המלצה לתחילה):
+# - שירות: $0 (חינמי)
+# - מגבלות: 750 שעות/חודש, יושן אחרי חוסר פעילות
+
+# MongoDB Atlas:
+# - M0: $0 (חינמי עד 512MB)
+# - M2: $9 (2GB)
+
+# רשתות חברתיות:
+# - רוב הרשתות: חינמי
+# - Twitter API: $100+ לשימוש מסחרי
+# - YouTube API: חינמי (מכסות מסוימות)
+
+# סה"כ לבוט קטן: $0-20/חודש

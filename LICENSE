@@ -1,0 +1,146 @@
+MIT License
+
+Copyright (c) 2025 Social Media Auto-Posting Bot
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+הסכם רישיון MIT בעברית (לא משפטי - רק להבנה):
+
+זהו רישיון קוד פתוח המאפשר לכם:
+✅ להשתמש בקוד בחופשיות
+✅ לשנות ולהתאים את הקוד
+✅ להפיץ את הקוד (מקורי או משונה)
+✅ להשתמש בקוד לצרכים מסחריים
+✅ להשתמש בקוד בפרויקטים פרטיים
+
+בתנאי שתכלילו:
+📄 הודעת זכויות יוצרים זו
+📄 טקסט הרישיון המלא
+
+הקוד מסופק "כמו שהוא" ללא אחריות כלשהי.
+
+---
+
+Third-Party Licenses and Acknowledgments:
+
+This project uses the following open-source libraries:
+
+• python-telegram-bot - GNU Lesser General Public License v3.0
+• pymongo - Apache License 2.0
+• tweepy - MIT License
+• facebook-sdk - Apache License 2.0
+• pytumblr - Apache License 2.0
+• google-api-python-client - Apache License 2.0
+• python-dotenv - BSD-3-Clause License
+• requests - Apache License 2.0
+• Pillow - PIL Software License
+• coloredlogs - MIT License
+• pytest - MIT License
+
+Special thanks to:
+• The Python community for excellent libraries
+• MongoDB for their database platform
+• All social media platforms for providing APIs
+• The open-source community for inspiration and tools
+
+---
+
+Contact Information:
+
+For questions about this license or the software:
+• GitHub Issues: https://github.com/your-username/social-media-bot/issues
+• Email: your-email@example.com
+
+---
+
+Disclaimer:
+
+This software is designed to interact with various social media platforms through their official APIs. Users are responsible for:
+
+1. Obtaining proper API credentials and tokens
+2. Complying with each platform's Terms of Service
+3. Respecting rate limits and usage policies
+4. Ensuring content posted meets platform guidelines
+5. Protecting API credentials and sensitive information
+
+The authors and contributors of this software:
+• Are not responsible for misuse of the software
+• Do not endorse any specific content or posting practices
+• Are not liable for any violations of platform terms
+• Recommend using the software responsibly and ethically
+
+---
+
+Version History:
+
+v1.0.0 (2025) - Initial release
+• Full automation for 8 social media platforms
+• Hebrew interface and documentation
+• Docker containerization support
+• Comprehensive test suite
+• Production-ready deployment options
+
+---
+
+Development Credits:
+
+This project was developed with love ❤️ in Israel 🇮🇱
+
+Built using modern Python practices:
+• Async/await for concurrent operations
+• Type hints for better code quality
+• Comprehensive error handling
+• Extensive test coverage
+• Docker containerization
+• Cloud deployment ready
+
+---
+
+Contributing:
+
+This project welcomes contributions! Please see CONTRIBUTING.md for guidelines.
+
+By contributing to this project, you agree that your contributions will be licensed under the same MIT License.
+
+---
+
+Security Notice:
+
+If you discover security vulnerabilities, please report them responsibly:
+• Do not open public issues for security problems
+• Email security concerns to: security@your-domain.com
+• Allow reasonable time for fixes before public disclosure
+
+---
+
+Privacy Notice:
+
+This software:
+• Does not collect or store personal data beyond what you configure
+• Stores API tokens locally or in your chosen database
+• Does not send data to third parties except the social media platforms you configure
+• Logs activities for debugging purposes only
+
+Users are responsible for:
+• Securing their API credentials
+• Complying with privacy regulations (GDPR, CCPA, etc.)
+• Informing followers about automated posting if required
+• Managing data retention according to their needs
